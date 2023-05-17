@@ -4,4 +4,5 @@
 ### Dibuat Oleh :
 ##### Zalfa Destian Ramadhani
 ### NIM
-##### G.111.20.0076
+### Kelas A2
+##### G.211.20.0076
