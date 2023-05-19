@@ -13,40 +13,61 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText edNamaDepan;
+    private EditText edNamaBelakang;
+    private EditText edUmur;
+    private Button btnSimpan;
+    private ArrayList<String> daftarNama;
+    private Intent intentList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText edNamaDepan = (EditText) findViewById(R.id.edNamaDepan);
-        EditText edNamaBelakang = (EditText) findViewById(R.id.edNamaBelakang);
-        EditText edUmur = (EditText) findViewById(R.id.edUmur);
-        Button btnSimpan = (Button) findViewById(R.id.btnSimpan);
+        edNamaDepan = findViewById(R.id.edNamaDepan);
+        edNamaBelakang = findViewById(R.id.edNamaBelakang);
+        edUmur = findViewById(R.id.edUmur);
+        btnSimpan = findViewById(R.id.btnSimpan);
 
-        ArrayList<String> daftar_nama = new ArrayList<>();
-
-        Intent intent_list = new Intent(MainActivity.this, ListActivity.class);
+        daftarNama = new ArrayList<>();
+        intentList = new Intent(MainActivity.this, ListActivity.class);
 
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String isian_nama_depan = edNamaDepan.getText().toString();
-                String isian_nama_belakang = edNamaBelakang.getText().toString();
-                int isian_umur = Integer.parseInt(edUmur.getText().toString());
+                String isianNamaDepan = edNamaDepan.getText().toString();
+                String isianNamaBelakang = edNamaBelakang.getText().toString();
+                int isianUmur = Integer.parseInt(edUmur.getText().toString());
 
-                int n = 100;
-                for(int i=1; i <= n; i++);
+                int jumlah = 100;
+                int totalUmur = isianUmur + jumlah;
 
-                if(isian_nama_depan.isEmpty()){
+                if (isianNamaDepan.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Isian masih kosong", Toast.LENGTH_SHORT).show();
-                }else{
-                    String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang);
-                   // daftar_nama.clear();
-                    daftar_nama.add(nama_lengkap);
+                } else {
+                    String namaLengkap = isianNamaDepan.concat(" ").concat(isianNamaBelakang);
+                    daftarNama.add(namaLengkap);
                     edNamaDepan.setText("");
                     edNamaBelakang.setText("");
-                    intent_list.putStringArrayListExtra("daftar_nama", daftar_nama);
-                    startActivity(intent_list);
+                    edUmur.setText(String.valueOf(totalUmur));
+                    intentList.putStringArrayListExtra("daftar_nama", daftarNama);
+                    startActivity(intentList);
+                }
+            }
+        });
+
+        // Looping saat input
+        edNamaDepan.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    String isianNamaDepan = edNamaDepan.getText().toString();
+                    if (!isianNamaDepan.isEmpty()) {
+                        for (int i = 0; i < 100; i++) {
+                            daftarNama.add(isianNamaDepan + " (" + (i + 100) + ")");
+                        }
+                    }
                 }
             }
         });
