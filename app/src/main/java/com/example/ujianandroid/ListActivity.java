@@ -1,12 +1,10 @@
 package com.example.ujianandroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -28,6 +26,13 @@ public class ListActivity extends AppCompatActivity {
         ArrayAdapter<String> ad_nama = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, daftar_nama);
 
         lvNama.setAdapter(ad_nama);
+        ArrayList<Integer> daftar_umur = new ArrayList<>();
+
+        for (String nama : daftar_nama) {
+            // Lakukan sesuatu dengan nama, misalnya mencetaknya
+            System.out.println(daftar_nama);
+        }
+
 
     }
 }
